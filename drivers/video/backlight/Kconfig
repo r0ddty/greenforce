@@ -15,7 +15,7 @@ if BACKLIGHT_LCD_SUPPORT
 #
 config LCD_CLASS_DEVICE
         tristate "Lowlevel LCD controls"
-	default n
+	default m
 	help
 	  This framework adds support for low-level control of LCD.
 	  Some framebuffer devices connect to platform-specific LCD modules
@@ -489,6 +489,20 @@ config BACKLIGHT_RAVE_SP
 	depends on RAVE_SP_CORE
 	help
 	  Support for backlight control on RAVE SP device.
+
+config LCD_BIAS
+	tristate "LCD Bias driver for bias"
+	depends on I2C
+	help
+	  This option enables support for the LCD bias using
+	  bias chip.
+
+config LCD_BKL
+	tristate "LCD BKL driver for bkl"
+	depends on I2C
+	help
+	  This option enables support for the LCD bias using
+	  bias chip.
 
 endif # BACKLIGHT_CLASS_DEVICE
 
