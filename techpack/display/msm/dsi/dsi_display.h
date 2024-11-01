@@ -196,6 +196,9 @@ struct dsi_display {
 	struct drm_connector *ext_conn;
 
 	const char *name;
+#ifdef CONFIG_TARGET_PROJECT_C3Q
+	bool is_prim_display;
+#endif
 	const char *display_type;
 	struct list_head list;
 	bool is_cont_splash_enabled;
@@ -276,6 +279,12 @@ struct dsi_display {
 	struct workqueue_struct *dma_cmd_workq;
 };
 
+#ifdef CONFIG_TARGET_PROJECT_C3Q
+//Update /proc/tp_info & /proc/tp_lockdown_info node
+extern void update_lct_tp_info(char *tp_info_buf, char *tp_lockdown_info_buf);
+//Set tp_lockdown_info node callback funcation
+extern void set_lct_tp_lockdown_info_callback(int (*pfun)(void));
+#endif
 int dsi_display_dev_probe(struct platform_device *pdev);
 int dsi_display_dev_remove(struct platform_device *pdev);
 
@@ -735,8 +744,8 @@ int dsi_display_cont_splash_config(void *display);
 int dsi_display_get_panel_vfp(void *display,
 	int h_active, int v_active);
 
-#ifdef CONFIG_TARGET_PROJECT_K7T
+//#ifdef CONFIG_TARGET_PROJECT_K7T
 struct dsi_display *get_main_display(void);
-#endif
+//#endif
 
 #endif /* _DSI_DISPLAY_H_ */
